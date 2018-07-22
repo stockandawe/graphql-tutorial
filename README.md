@@ -1,24 +1,60 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Sample Requests to make in GraphQL playground
 
-Things you may want to cover:
+#### Get all links, votes and total votes
+```
+{
+  allLinks {
+    id
+    description
+    votes {
+      id
+    }
+    votes_count
+  }  
+}
+```
 
-* Ruby version
+#### Sign in and vote for a link
+```
+mutation{
+  signinUser (
+    email: {
+      email: "test@example.com",
+      password: "123456"
+    }
+  )
+  {
+    token
+    user {
+      id
+    }
+  }
 
-* System dependencies
+  createVote(linkId: "4") {
+    link {
+      id
+      description
+    }
+    user {
+      name
+    }
+  }
+}
+```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### Get all users and their votes
+```
+{
+  allUsers {
+    id
+    name
+    votes {
+      link {
+        description
+      }
+    }
+  }
+}
+```
